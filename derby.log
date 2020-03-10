@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Mar 06 11:34:32 CET 2020:
+ Derby The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088) változat betöltése: a816c00e-0170-af69-343a-00000785b8d0 példány
+a(z) C:\Users\Krisztián\Documents\NetBeansProjects\BusRoster\sampleDB adatbázis-könyvtáron: jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+
+java.vendor=Oracle Corporation
+java.runtime.version=13.0.1+9
+user.dir=C:\Users\Krisztián\Documents\NetBeansProjects\BusRoster
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Az adatbázis-osztálybetöltő elindult - derby.database.classpath=''
