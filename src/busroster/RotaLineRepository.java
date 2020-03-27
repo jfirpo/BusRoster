@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class RotaLineRepository {
     
-    ArrayList<RotaLine> rotaLines = new ArrayList<>();
+    private ArrayList<RotaLine> rotaLines = new ArrayList<>();
 
     public RotaLineRepository(){
     }
@@ -30,14 +30,11 @@ public class RotaLineRepository {
                 isDayOff.add(actualLine);
             actualLine++;
         }
-    
     return isDayOff;
     }
 
-    
     public boolean isRestDay(int rotaLine, int dayOfWeek){
         boolean isRestDay = false;
         if (rotaLines.get(--rotaLine).dayOff(dayOfWeek)) isRestDay = true;
     return isRestDay;}
-    
 }

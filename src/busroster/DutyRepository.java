@@ -13,9 +13,9 @@ import java.util.ArrayList;
  */
 public class DutyRepository {
 
-    ArrayList<Duty> duties = new ArrayList<>();   
+    private ArrayList<Duty> duties = new ArrayList<>();   
+
     public DutyRepository(){
-    
     }
 
     public void setDuties(ArrayList<Duty> duties) {
@@ -26,11 +26,7 @@ public class DutyRepository {
         return duties;
     }
     
-        public DutyRepository(DB db){
+    public DutyRepository(DB db){
             for (int i = 1; i < 18; i++) duties.add(db.getAllDutys());
     }
-
-
-
-    
 }

@@ -1,19 +1,13 @@
 package busroster;
 
-
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
-
 public class SwapRepository {
-    ArrayList<Swap> swaps = new ArrayList<>();
-
+    private ArrayList<Swap> swaps = new ArrayList<>();
     private int possibleSwapLine, possibleSwapDay;
     private String dutyNumberOnpossibleSwapDay, possibleSwapperDriverName;
-
     private RotaLineRepository rlRep;                                                   //rotalina kezelő osztály példánya
     private int dayOfInputWeek, actualLine;                                     // a kiválasztott dátum, milyen napra esik (Vasárnap-Szombat 1-7)    
     private Driver driverOfPossibleSwapLine;

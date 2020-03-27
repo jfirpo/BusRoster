@@ -7,8 +7,8 @@ public class RotaLine {
 
     private String sundayDn, mondayDn, tuesdayDn, wednesdayDn, thursdayDn, fridayDn, saturdayDn;
     private int rotaLine;
-    //public ArrayList<Integer> dayOffDays = new ArrayList<>();
     private static final GregorianCalendar STARTDATE = new GregorianCalendar(2020, 0, 5);
+
     public RotaLine(){
     }
 

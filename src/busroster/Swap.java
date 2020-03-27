@@ -1,9 +1,5 @@
 package busroster;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 public class Swap {
 
     private int possibleSwapLine, possibleSwapDay;
@@ -35,5 +31,4 @@ public class Swap {
     public String getPossibleSwapperDriverName() {
         return possibleSwapperDriverName;
     }
-
 }

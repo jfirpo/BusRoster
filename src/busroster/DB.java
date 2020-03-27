@@ -1,4 +1,3 @@
-
 package busroster;
 
 import java.io.File;
@@ -19,7 +18,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class DB {
     final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
     final String URL = "jdbc:derby:sampleDB;create=true";
@@ -30,7 +28,6 @@ public class DB {
     Connection conn = null;
     Statement createStatement = null;
     DatabaseMetaData dbmd = null;
-    
     
     public DB() {
         //Megpróbáljuk életre kelteni
@@ -98,10 +95,7 @@ public class DB {
         } catch (SQLException ex) {
             System.out.println("Valami baj van az rotaline adattábla létrehozásakor.");
             System.out.println(""+ex);
-        }
-
-        
-        
+        }        
     }
     
     
@@ -236,8 +230,7 @@ public class DB {
         catch (FileNotFoundException ex) {
                         System.out.println("Valami gond van a soforok filejaval.." + ex);                   }
     }
-    
-
+  
     public void addDuty(String dutyNumber, LocalTime startTime, LocalTime finishTime){
         try {
 

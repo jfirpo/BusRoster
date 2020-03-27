@@ -41,5 +41,4 @@ public class Duty {
     public String getDutyNumber() {
         return dutyNumber;
     }
-
 }
