@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -173,7 +174,7 @@ public class DB {
             drivers = new ArrayList<>();
             
             while (rs.next()){
-                Driver actualDriver = new Driver(rs.getString("Name"),rs.getString("Employee number"), rs.getInt("Startline"));
+                Driver actualDriver = new Driver(rs.getString("Name"),rs.getString("Employeenumber"), rs.getInt("Startline"));
                 drivers.add(actualDriver);
             }
         } catch (SQLException ex) {
@@ -301,6 +302,22 @@ public class DB {
         }
     }
     
+    public Duty getAllDutys(){
+        String sql = "select * from dutys";
+        Duty duty = new Duty();
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            while (rs.next()){
+                String Dutynumber = rs.getString("Dutynumber");
+                Time starttime = rs.getTime("Starttime");
+                Time finishtime = rs.getTime("Finishtime");
+                duty = new  Duty(Dutynumber, starttime.toLocalTime(), finishtime.toLocalTime());
+            }
+        } catch (SQLException ex) {
+            System.out.println("Valami baj van a driverek kiolvasásakor");
+            System.out.println(""+ex);
+        }
+    return duty;}
     
     public void showRotaLineMeta(){
         String sql = "select * from rotaline";
@@ -379,6 +396,32 @@ public class DB {
         }
     }
     
+    public RotaLine getRotaLine(int rotaLine){
+        //String sql = "select * from drivers where Startline = '" + startLine +"'";
+        String sql = "select * from rotaline where rotalineumber = "  + "'"+rotaLine+ "'";
+        RotaLine rl = null;
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            while (rs.next()){
+                String rotaLine2 = rs.getString("rotalineumber");
+                String sunday = rs.getString("sundaydutynumber");
+                String monday = rs.getString("mondaydutynumber");
+                String tuesday = rs.getString("tuesdaydutynumber");
+                String wednesday = rs.getString("wednesdaydutynumber");
+                String thursday = rs.getString("thursdaydutynumber");
+                String friday = rs.getString("fridaydutynumber");
+                String saturday = rs.getString("saturdaydutynumber");
+                
+                rl = new RotaLine(rotaLine, sunday, monday, tuesday,
+                wednesday, thursday, friday, saturday);
+            }
+        }catch (SQLException ex) {
+            System.out.println("Valami baj van a rotaline kiolvasásakor az adatbazisbol");
+            System.out.println(""+ex);
+        }
+      return rl;
+    }
+
     public String getDutyNumber(int rotaLine, int dayOfWeek){
         /*
         create table rotaline(rotalineumber varchar(2), sundaydutynumber varchar(6),"

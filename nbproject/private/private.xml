@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/RotaLine.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/Driver.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/Swap.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/DriverRepository.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/DutyRepository.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/SwapRepository.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/BusRoster.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/DB.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/RotaLineRepository.java</file>
+            <file>file:/C:/Users/Krisztián/Documents/NetBeansProjects/BusRoster/src/busroster/Duty.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -6,6 +6,7 @@ public class Duty {
 
     private LocalTime startTime, finishTime;
     private String dutyNumber;
+    private boolean dayOff;
     
     public Duty(){
     }    
@@ -14,6 +15,7 @@ public class Duty {
         this.dutyNumber = dutyNumber;
         this.finishTime = finishTime;
         this.startTime = startTime;
+        if (this.dutyNumber.equals("1001")) dayOff = true;
     }    
 
     public void setStartTime(LocalTime startTime) {

@@ -1,11 +1,14 @@
 package busroster;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
 public class RotaLine {
 
     private String sundayDn, mondayDn, tuesdayDn, wednesdayDn, thursdayDn, fridayDn, saturdayDn;
     private int rotaLine;
-
-
+    //public ArrayList<Integer> dayOffDays = new ArrayList<>();
+    private static final GregorianCalendar STARTDATE = new GregorianCalendar(2020, 0, 5);
     public RotaLine(){
     }
 
@@ -19,6 +22,10 @@ public class RotaLine {
         this.thursdayDn = thursdayDn;
         this.tuesdayDn = tuesdayDn;
         this.wednesdayDn = wednesdayDn;        
+    }
+
+    public static GregorianCalendar getSTARTDATE() {
+        return STARTDATE;
     }
 
     public String getSundayDn() {
@@ -84,5 +91,48 @@ public class RotaLine {
     public void setRotaLine(int rotaLine) {
         this.rotaLine = rotaLine;
     }
+    
+    public ArrayList<Integer> getDayOffDays(){
+        int i = 1;
+        ArrayList<Integer> dayOffDays = new ArrayList<>();
+        if (this.sundayDn.equals("1001")) dayOffDays.add(i);
+        i++;
+        if (this.mondayDn.equals("1001")) dayOffDays.add(i);
+        i++;
+        if (this.tuesdayDn.equals("1001")) dayOffDays.add(i);
+        i++;
+        if (this.wednesdayDn.equals("1001")) dayOffDays.add(i);
+        i++;
+        if (this.thursdayDn.equals("1001")) dayOffDays.add(i);
+        i++;
+        if (this.fridayDn.equals("1001")) dayOffDays.add(i);
+        i++;
+        if (this.saturdayDn.equals("1001")) dayOffDays.add(i);                
+       return dayOffDays;
+    }
 
+    public boolean dayOff(int dayOfWeek){
+        boolean dayOff = false;
+            switch (dayOfWeek) {
+             case 1: if (this.sundayDn.equals("1001")) dayOff = true; break;
+             case 2: if (this.mondayDn.equals("1001")) dayOff = true; break;
+             case 3: if (this.tuesdayDn.equals("1001")) dayOff = true; break;
+             case 4: if (this.wednesdayDn.equals("1001")) dayOff = true; break;
+             case 5: if (this.thursdayDn.equals("1001")) dayOff = true; break;
+             case 6: if (this.fridayDn.equals("1001")) dayOff = true; break;
+             case 7: if (this.saturdayDn.equals("1001")) dayOff = true; break;
+            }        
+            return dayOff;
+    }
+
+    public String getDutyNumberFromDayNumber(int day){
+        String dutyNumber = null;
+        if (day == 1) dutyNumber = this.sundayDn;
+        if (day == 2) dutyNumber = this.mondayDn;
+        if (day == 3) dutyNumber = this.tuesdayDn;
+        if (day == 4) dutyNumber = this.wednesdayDn;
+        if (day == 5) dutyNumber = this.thursdayDn;
+        if (day == 6) dutyNumber = this.fridayDn;
+        if (day == 7) dutyNumber = this.saturdayDn;
+    return dutyNumber;}
 }
