@@ -26,5 +26,14 @@ public class DriverRepository {
             if(rotaLine == drivers.get(i).countOfActualLine(inputDate))
                 driver = drivers.get(i);
         }           
-        return driver;}    
+        return driver;}
+    
+    public Driver getDriver(String empNum){
+            Driver driver = null;
+            for (int i = 0; i<9;i++){
+            if(empNum.equals(drivers.get(i).getEmployeeNumber()))
+                driver = drivers.get(i);
+        }
+    return driver;}
+
 }

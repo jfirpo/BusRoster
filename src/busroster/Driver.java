@@ -73,5 +73,6 @@ return actualLine;
                 System.out.println("Employee numbers: 3210-3218");
                 System.out.println("Kerem az employee number-t: "); 
                 this.employeeNumber = keyboard.next();
-    }                                       //????
+    }
+    
 }
