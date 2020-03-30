@@ -11,13 +11,13 @@ public class BusRoster {
         DriverRepository drivers = new DriverRepository(myDataBase);
         
         Calendar inputDate  = null;                                             // kiválasztott dátum példánya - üres
-        Driver driver = new Driver();                                           // sofőr osztály példánya - üres
+
         //driver = drivers.getDriver(driver.getEmployeeNumber());            // a bekérő sofőr azpnpsítása
         //inputDate = setInputDate();                                           // a kerdeses datum bekerese
         //teszteleshez bemeno adatok fixen. sofor es celdatum
-        driver = drivers.getDriver("3210");                                 // tesztsofőr - kiválasztás direktben
+        
         inputDate = new GregorianCalendar(2020,1,2);                            // tesztdátum kiválasztás direktben  ,.,.
-        SwapRepository swaps = new SwapRepository(driver, inputDate, myDataBase);
+        SwapRepository swaps = new SwapRepository(drivers.getDriver("3210"), inputDate, myDataBase);
 
         if (swaps.doesItNeedASwap()){
             swaps.setSwaps();
