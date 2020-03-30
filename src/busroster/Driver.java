@@ -67,12 +67,5 @@ public class Driver {
 		//megalapitja, hogy az adott naptari nap, milyen napra esik a heten
 return actualLine;
 }
-        
-    public void setEmpNumKeyb(){
-                Scanner keyboard = new Scanner(System.in);
-                System.out.println("Employee numbers: 3210-3218");
-                System.out.println("Kerem az employee number-t: "); 
-                this.employeeNumber = keyboard.next();
-    }
-    
+            
 }

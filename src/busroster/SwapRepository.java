@@ -10,7 +10,7 @@ public class SwapRepository {
     private String dutyNumberOnpossibleSwapDay, possibleSwapperDriverName;
     private RotaLineRepository rlRep;                                                   //rotalina kezelő osztály példánya
     private int dayOfInputWeek, actualLine;                                     // a kiválasztott dátum, milyen napra esik (Vasárnap-Szombat 1-7)    
-    private Driver driverOfPossibleSwapLine;
+    private Driver driverOfPossibleSwapLine, driver;
     private DriverRepository drivers;
     private Calendar inputDate;
     private ArrayList<Integer> dayOffOnActual = new ArrayList<>();
@@ -19,14 +19,16 @@ public class SwapRepository {
     public SwapRepository(){
     }
     
-    public SwapRepository(Driver driver, Calendar inputDate, DB db){
+    public SwapRepository(String driverEmpNum, Calendar inputDate, DB db){
+        this.drivers = new DriverRepository(db);
+        this.driver = drivers.getDriver(driverEmpNum);
         this.inputDate = inputDate;
         this.actualLine = driver.countOfActualLine(inputDate);                   // az azonosított sofőr, melyik soron dolgozik a választott dátumon (1-9)
         this.rlRep = new RotaLineRepository(db);          //rotalina kezelő osztály példánya
         this.rl = rlRep.getRotaLine(actualLine);                                // a leendő sor példányosítása a vizsgálatokhoz
         this.dayOffOnActual = rl.getDayOffDays();                                    // a celheten levo szabadnapjaink            
         this.dayOfInputWeek = inputDate.get(GregorianCalendar.DAY_OF_WEEK);      // a kiválasztott dátum, milyen napra esik (Vasárnap-Szombat 1-7)
-        this.drivers = new DriverRepository(db);
+        
     }
     
     public void showThePossibilities(){
