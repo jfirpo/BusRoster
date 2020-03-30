@@ -7,7 +7,15 @@ import java.util.Scanner;
 public class BusRoster {
         
     public static void main(String[] args) {        
-        DB myDataBase = new DB();                                               // adatbázis kapcsolat osztály példánya: myDataBase                                                   
+        DB myDataBase = new DB();                                              // adatbázis kapcsolat osztály példánya: myDataBase                                                   
+        
+//        myDataBase.showAllDrivers();
+//        myDataBase.showAllRotaLines();
+//        myDataBase.showAllDutys();
+//        
+//        myDataBase.showDriversMeta();
+//        myDataBase.showRotaLineMeta();
+        
         Calendar inputDate  = null;                                             // kiválasztott dátum példánya - üres
         Driver driver = new Driver();                                           // sofőr osztály példánya - üres
         //driver = myDataBase.getDriver(driver.getEmployeeNumber());            // a bekérő sofőr azpnpsítása
@@ -21,6 +29,7 @@ public class BusRoster {
             swaps.setSwaps();
             swaps.showThePossibilities();
         } else System.out.println("Szabadnap");
+        
     }
 }
 

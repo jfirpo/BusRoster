@@ -27,6 +27,6 @@ public class DutyRepository {
     }
     
     public DutyRepository(DB db){
-            for (int i = 1; i < 18; i++) duties.add(db.getAllDutys());
+            this.duties = db.getAllDutys();
     }
 }

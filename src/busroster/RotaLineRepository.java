@@ -11,7 +11,7 @@ public class RotaLineRepository {
     }
     
     public RotaLineRepository(DB db){
-        for (int i = 1; i < 10; i++) rotaLines.add(db.getRotaLine(i));
+        this.rotaLines = db.getAllRotaLines();
     }
 
     public void setRotaLines(ArrayList<RotaLine> rotaLines) {
@@ -37,4 +37,12 @@ public class RotaLineRepository {
         boolean isRestDay = false;
         if (rotaLines.get(--rotaLine).dayOff(dayOfWeek)) isRestDay = true;
     return isRestDay;}
+    
+    public RotaLine getRotaLine(int rotaLine){
+        RotaLine rl = null;
+        for(int i = 0; i < 9; i++){
+            if (this.rotaLines.get(i).getRotaLine() == rotaLine)
+                rl = rotaLines.get(i);
+        }    
+    return rl;}
 }

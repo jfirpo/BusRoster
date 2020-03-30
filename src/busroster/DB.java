@@ -33,7 +33,7 @@ public class DB {
         //Megpróbáljuk életre kelteni
         try {
             conn = DriverManager.getConnection(URL);
-            System.out.println("A híd létrejött");
+            //System.out.println("A híd létrejött");
         } catch (SQLException ex) {
             System.out.println("Valami baj van a connection (híd) létrehozásakor.");
             System.out.println(""+ex);
@@ -57,7 +57,7 @@ public class DB {
             System.out.println(""+ex);
         }
         
-        // Megnézzük, létezik-e a DRIVERS adattábla.
+        // Megnézzük, létezik-e a DRIVERS adattábla. Ha nem, létrehozzuk.
         try {
             ResultSet rs = dbmd.getTables(null, "APP", "DRIVERS", null);
             if(!rs.next())
@@ -67,9 +67,9 @@ public class DB {
         } catch (SQLException ex) {
             System.out.println("Valami baj van az adattáblák létrehozásakor.");
             System.out.println(""+ex);
-        }
+          }
 
-        // Megnézzük, létezik-e a DUTYS adattábla.
+        // Megnézzük, létezik-e a DUTYS adattábla. Ha nem, létrehozzuk.
         try {
             ResultSet rs = dbmd.getTables(null, "APP", "DUTYS", null);
             if(!rs.next())
@@ -82,7 +82,7 @@ public class DB {
             System.out.println(""+ex);
         }
         
-                // Megnézzük, létezik-e a ROTALINE adattábla.
+        // Megnézzük, létezik-e a ROTALINE adattábla. Ha nem, létrehozzuk.
         try {
             ResultSet rs = dbmd.getTables(null, "APP", "ROTALINE", null);
             if(!rs.next())
@@ -98,7 +98,7 @@ public class DB {
         }        
     }
     
-    
+    // sofor hozzaadasa az adattablahoz (name, emp number es startline alpjan)
     public void addDriver(String name, String employeeNumber, int startLine){
         try {
               String sql = "insert into drivers values (?,?,?)";
@@ -113,6 +113,7 @@ public class DB {
         }
     }
     
+    // sofor hozzaadasa az adattablahoz (sofor objektum altal)
     public void addDriver(Driver driver){
       try {
         String sql = "insert into drivers values (?,?,?)";
@@ -127,57 +128,8 @@ public class DB {
         }
     }
     
-    public void showAllDrivers(){
-        String sql = "select * from drivers";
-        try {
-            ResultSet rs = createStatement.executeQuery(sql);
-            while (rs.next()){
-                String name = rs.getString("Name");
-                String employeeNumber = rs.getString("Employeenumber");
-                int startLine = rs.getInt("Startline");
-                System.out.println(name + " | " + employeeNumber + " | " + startLine);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Valami baj van a driverek kiolvasásakor");
-            System.out.println(""+ex);
-        }
-    }
-    
-    public void showDriversMeta(){
-        String sql = "select * from drivers";
-        ResultSet rs = null;
-        ResultSetMetaData rsmd = null;
-        try {
-            rs = createStatement.executeQuery(sql);
-            rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            for (int x = 1; x <= columnCount; x++){
-                System.out.print(rsmd.getColumnName(x) + " | ");
-            }
-        } catch (SQLException ex) {
-                        System.out.println("Valami baj van a driverek metaadatainak kiolvasásakor");
-            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public ArrayList<Driver> getAllDrivers(){
-        String sql = "select * from drivers";
-        ArrayList<Driver> drivers = null;
-        try {
-            ResultSet rs = createStatement.executeQuery(sql);
-            drivers = new ArrayList<>();
-            
-            while (rs.next()){
-                Driver actualDriver = new Driver(rs.getString("Name"),rs.getString("Employeenumber"), rs.getInt("Startline"));
-                drivers.add(actualDriver);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Valami baj van a driverek kiolvasásakor");
-            System.out.println(""+ex);
-        }
-      return drivers;
-    }
 
+    // employeeNumber alapján, kikeres és atad egy driver példányt, a drivers adattáblából
     public Driver getDriver(String employeeNumber){
         String sql = "select * from drivers where Employeenumber = '" + employeeNumber +"'";
         Driver driver = null;
@@ -196,6 +148,7 @@ public class DB {
       return driver;
     }
     
+    // startLine alapján, kikeres és atad egy driver példányt, a drivers adattáblából
     public Driver getDriver(int startLine){
         //String sql = "select * from drivers where Startline = '" + startLine +"'";
         String sql = "select * from drivers where Startline = " + startLine;
@@ -215,6 +168,7 @@ public class DB {
       return driver;
     }
     
+    // feltolti s soforok tablat, a filebol, az atadando parameter, a fileban talalhato soforok szama
     public void driversUpload(int numsOfDrivers){
             try {
           Scanner lemezOlvaso = new Scanner(new File("drivers.txt"));
@@ -230,7 +184,8 @@ public class DB {
         catch (FileNotFoundException ex) {
                         System.out.println("Valami gond van a soforok filejaval.." + ex);                   }
     }
-  
+    
+    // duty hozzáadásas a dutys tábához
     public void addDuty(String dutyNumber, LocalTime startTime, LocalTime finishTime){
         try {
 
@@ -247,6 +202,7 @@ public class DB {
         }
     }
     
+    // feltolti s soforok tablat, a filebol, az atadando parameter, a fileban talalhato soforok szama
     public void dutysUpload(int numsOfDutys){
             try {
           Scanner lemezOlvaso = new Scanner(new File("dutysForDB.txt"));
@@ -265,6 +221,7 @@ public class DB {
                         System.out.println("Valami gond van a soforok filejaval.." + ex);                   }
     }
     
+    //hozzaad a dutys tablahoz egy duty objektubombol adatokat
     public void addDuty(Duty duty){
       try {
         String sql = "insert into dutys values (?,?,?)";
@@ -279,56 +236,8 @@ public class DB {
         }
     } 
   
-    public void showAllDutys(){
-        String sql = "select * from dutys";
-        try {
-            ResultSet rs = createStatement.executeQuery(sql);
-            while (rs.next()){
-                String Dutynumber = rs.getString("Dutynumber");
-                String starttime = rs.getString("Starttime");
-                String finishtime = rs.getString("Finishtime");
-                System.out.println(Dutynumber + " | " + starttime + " | " + finishtime);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Valami baj van a driverek kiolvasásakor");
-            System.out.println(""+ex);
-        }
-    }
-    
-    public Duty getAllDutys(){
-        String sql = "select * from dutys";
-        Duty duty = new Duty();
-        try {
-            ResultSet rs = createStatement.executeQuery(sql);
-            while (rs.next()){
-                String Dutynumber = rs.getString("Dutynumber");
-                Time starttime = rs.getTime("Starttime");
-                Time finishtime = rs.getTime("Finishtime");
-                duty = new  Duty(Dutynumber, starttime.toLocalTime(), finishtime.toLocalTime());
-            }
-        } catch (SQLException ex) {
-            System.out.println("Valami baj van a driverek kiolvasásakor");
-            System.out.println(""+ex);
-        }
-    return duty;}
-    
-    public void showRotaLineMeta(){
-        String sql = "select * from rotaline";
-        ResultSet rs = null;
-        ResultSetMetaData rsmd = null;
-        try {
-            rs = createStatement.executeQuery(sql);
-            rsmd = rs.getMetaData();
-            int columnCount = rsmd.getColumnCount();
-            for (int x = 1; x <= columnCount; x++){
-                System.out.print(rsmd.getColumnName(x) + " | ");
-            }
-        } catch (SQLException ex) {
-                        System.out.println("Valami baj van a rotaline metaadatainak kiolvasásakor");
-            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+        
+    // feltolt filebol a megadott rotalinesszam alapján a fajlban, adatokat a rotalines tablaba
     public void rotaLinesUpload(int numsOfRotaLines){
             try {
           Scanner lemezOlvaso = new Scanner(new File("nirota.txt"));
@@ -347,6 +256,7 @@ public class DB {
                         System.out.println("Valami gond van a soforok filejaval.." + ex);                   }
     }
     
+    //egy adott rotaline objektum adatait tolti fel a rotalines adattáblába
     public void addRotaLine(RotaLine rotaLine){
       try {
         String sql = "insert into rotaline values (?,?,?,?,?,?,?,?)";
@@ -366,6 +276,27 @@ public class DB {
         }
     }
     
+
+
+
+
+    // az osszes adat kiiratasa a sofor tablabol a konzolra ----------------- mukodik, az adattabla tartalmanak ellenorzesere hasznalando
+    public void showAllDrivers(){
+        String sql = "select * from drivers";
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            while (rs.next()){
+                String name = rs.getString("Name");
+                String employeeNumber = rs.getString("Employeenumber");
+                int startLine = rs.getInt("Startline");
+                System.out.println(startLine + " | " + employeeNumber + " | " + name);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Valami baj van a driverek kiolvasásakor");
+            System.out.println(""+ex);
+        }
+    }
+    // kirja a konzolra az osszes sort a rotaline tablabol -------------------------------mukodik, az adattabla tartalmanak ellenorzesere hasznalando
     public void showAllRotaLines(){
         String sql = "select * from rotaline";
         try {
@@ -388,7 +319,166 @@ public class DB {
             System.out.println(""+ex);
         }
     }
+    // a dutys tablabol kiirja az adatokat a konzolra ------------- mukodik, az adattabla tartalmanak ellenorzesere hasznalando
+    public void showAllDutys(){
+        String sql = "select * from dutys";
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            while (rs.next()){
+                String Dutynumber = rs.getString("Dutynumber");
+                String starttime = rs.getString("Starttime");
+                String finishtime = rs.getString("Finishtime");
+                System.out.println(Dutynumber + " | " + starttime + " | " + finishtime);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Valami baj van a driverek kiolvasásakor");
+            System.out.println(""+ex);
+        }
+    }
+    // driver tábla metaadatainak kiirasa a konzolra
+    public void showDriversMeta(){
+        String sql = "select * from drivers";
+        ResultSet rs = null;
+        ResultSetMetaData rsmd = null;
+        try {
+            rs = createStatement.executeQuery(sql);
+            rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int x = 1; x <= columnCount; x++){
+                System.out.print(rsmd.getColumnName(x) + " | ");
+            }
+            System.out.println();
+        } catch (SQLException ex) {
+                        System.out.println("Valami baj van a driverek metaadatainak kiolvasásakor" + ex);
+        }
+    }
+        // kiirja  a konzolra a rotaline metaadatokat
+    public void showRotaLineMeta(){
+        String sql = "select * from rotaline";
+        ResultSet rs = null;
+        ResultSetMetaData rsmd = null;
+        try {
+            rs = createStatement.executeQuery(sql);
+            rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int x = 1; x <= columnCount; x++){
+                System.out.print(rsmd.getColumnName(x) + " | ");
+            }
+        } catch (SQLException ex) {
+                        System.out.println("Valami baj van a rotaline metaadatainak kiolvasásakor");
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // atad egy arralist objektumot a peldanyositott soforokkel -------------- mukodik
+    public ArrayList<Driver> getAllDrivers(){
+        String sql = "select * from drivers";
+        ArrayList<Driver> drivers = null;
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            drivers = new ArrayList<>();
+            
+            while (rs.next()){
+                Driver actualDriver = new Driver(rs.getString("Name"),rs.getString("Employeenumber"), rs.getInt("Startline"));
+                drivers.add(actualDriver);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Valami baj van a driverek kiolvasásakor");
+            System.out.println(""+ex);
+        }
+      return drivers;
+    }
+    // a dutys tablabol visszaad minden dutyt egz arraylist objektumba
+    public ArrayList<Duty> getAllDutys(){
+        String sql = "select * from dutys";
+        ArrayList<Duty> duties =  new ArrayList<>();
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            while (rs.next()){
+                String dutyNumber = rs.getString("Dutynumber");
+                Time starttime = rs.getTime("Starttime");
+                Time finishtime = rs.getTime("Finishtime");
+                duties.add(new Duty(dutyNumber, starttime.toLocalTime(), finishtime.toLocalTime()));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Valami baj van a driverek kiolvasásakor");
+            System.out.println(""+ex);
+        }
+    return duties;
+    }
+
+    public ArrayList<RotaLine> getAllRotaLines(){
+        String sql = "select * from ROTALINE";
+        ArrayList<RotaLine> rotaLines =  new ArrayList<>();
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            while (rs.next()){
+           
+                int rl = rs.getInt("rotalineumber");
+                String sun = rs.getString("sundaydutynumber"); String mon = rs.getString("mondaydutynumber");
+                String tue = rs.getString("tuesdaydutynumber"); String wed = rs.getString("wednesdaydutynumber");
+                String thu = rs.getString("thursdaydutynumber"); String fri = rs.getString("fridaydutynumber");
+                String sat = rs.getString("saturdaydutynumber"); 
+                rotaLines.add(new RotaLine(rl,sun, mon, tue, wed, thu, fri, sat));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Valami baj van a rotalines kiolvasásakor");
+            System.out.println(""+ex);
+        }
+    return rotaLines;
+    }
     
+    //..
+    public void kozvetlenParancs(String sql){
+        try {
+            createStatement.execute(sql);
+        } catch (SQLException ex) {
+            System.out.println("Nem futott le a kozvetlen parancs " + ex);
+        }
+    }    
+
+}
+
+
+
+
+/*
+    // visszaadja adtott nap dutynumber string erteket, rotaline es az adtott het sorszama alapjan
+    public String getDutyNumber(int rotaLine, int dayOfWeek){
+        
+        String nameOfColumn = "";
+        String dutyNumber = "";
+        switch(dayOfWeek){
+            case 1: nameOfColumn = "sundaydutynumber";
+                    break;
+            case 2: nameOfColumn = "mondaydutynumber";
+                    break;
+            case 3: nameOfColumn = "tuesdaydutynumber";
+                    break;
+            case 4: nameOfColumn = "wednesdaydutynumber";
+                    break;
+            case 5: nameOfColumn = "thursdaydutynumber";
+                    break;
+            case 6: nameOfColumn = "fridaydutynumber";
+                    break;
+            case 7: nameOfColumn = "saturdaydutynumber";
+                    break;
+        }
+        String sql = ("select " + nameOfColumn +  " from rotaline WHERE rotalineumber = '" + rotaLine + "'");
+        Driver driver = null;
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            while (rs.next()){
+            dutyNumber = rs.getString(nameOfColumn);
+            }
+        }catch (SQLException ex) {
+            System.out.println("Valami baj van a driver kiolvasásakor az adatbazisbol");
+            System.out.println(""+ex);
+        }
+      return dutyNumber;
+    }
+
+    // visszaad egy rotaLine objektumot, a rotaLine szama alapján a rotaline adatttáblából
     public RotaLine getRotaLine(int rotaLine){
         //String sql = "select * from drivers where Startline = '" + startLine +"'";
         String sql = "select * from rotaline where rotalineumber = "  + "'"+rotaLine+ "'";
@@ -415,53 +505,4 @@ public class DB {
       return rl;
     }
 
-    public String getDutyNumber(int rotaLine, int dayOfWeek){
-        /*
-        create table rotaline(rotalineumber varchar(2), sundaydutynumber varchar(6),"
-                     + "mondaydutynumber varchar(6), tuesdaydutynumber varchar(6), wednesdaydutynumber varchar(6),"
-                     + "thursdaydutynumber varchar(6), fridaydutynumber varchar(6), saturdaydutynumber varchar(6))");
-        */
-        String nameOfColumn = "";
-        String dutyNumber = "";
-        switch(dayOfWeek){
-            case 1: nameOfColumn = "sundaydutynumber";
-                    break;
-            case 2: nameOfColumn = "mondaydutynumber";
-                    break;
-            case 3: nameOfColumn = "tuesdaydutynumber";
-                    break;
-            case 4: nameOfColumn = "wednesdaydutynumber";
-                    break;
-            case 5: nameOfColumn = "thursdaydutynumber";
-                    break;
-            case 6: nameOfColumn = "fridaydutynumber";
-                    break;
-            case 7: nameOfColumn = "saturdaydutynumber";
-                    break;
-            
-        }
-        String sql = ("select " + nameOfColumn +  " from rotaline WHERE rotalineumber = '" + rotaLine + "'");
-        Driver driver = null;
-
-        try {
-            ResultSet rs = createStatement.executeQuery(sql);
-            while (rs.next()){
-            dutyNumber = rs.getString(nameOfColumn);
-            }
-        }catch (SQLException ex) {
-            System.out.println("Valami baj van a driver kiolvasásakor az adatbazisbol");
-            System.out.println(""+ex);
-        }
-      return dutyNumber;
-    }
-    
-    
-    public void kozvetlenParancs(String sql){
-        try {
-            createStatement.execute(sql);
-        } catch (SQLException ex) {
-            System.out.println("Nem futott le a kozvetlen parancs " + ex);
-        }
-    }    
-
-}
+*/

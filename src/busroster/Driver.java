@@ -71,8 +71,7 @@ return actualLine;
     public void setEmpNumKeyb(){
                 Scanner keyboard = new Scanner(System.in);
                 System.out.println("Employee numbers: 3210-3218");
-                System.out.println("Kerem az employee number-t: ");
-                String employeeNumbe2 = keyboard.next();
-                this.employeeNumber = employeeNumbe2;
-    }
+                System.out.println("Kerem az employee number-t: "); 
+                this.employeeNumber = keyboard.next();
+    }                                       //????
 }

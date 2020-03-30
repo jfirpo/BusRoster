@@ -23,7 +23,7 @@ public class SwapRepository {
         this.inputDate = inputDate;
         this.actualLine = driver.countOfActualLine(inputDate);                   // az azonosított sofőr, melyik soron dolgozik a választott dátumon (1-9)
         this.rlRep = new RotaLineRepository(db);          //rotalina kezelő osztály példánya
-        this.rl = db.getRotaLine(actualLine);                                // a leendő sor példányosítása a vizsgálatokhoz
+        this.rl = rlRep.getRotaLine(actualLine);                                // a leendő sor példányosítása a vizsgálatokhoz
         this.dayOffOnActual = rl.getDayOffDays();                                    // a celheten levo szabadnapjaink            
         this.dayOfInputWeek = inputDate.get(GregorianCalendar.DAY_OF_WEEK);      // a kiválasztott dátum, milyen napra esik (Vasárnap-Szombat 1-7)
         this.drivers = new DriverRepository(db);
