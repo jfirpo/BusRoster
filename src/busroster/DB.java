@@ -7,7 +7,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
@@ -15,8 +14,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DB {
     final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
@@ -75,7 +72,6 @@ public class DB {
             if(!rs.next())
             {
              createStatement.execute("create table dutys(dutynumber varchar(8), starttime time, finishtime time)");
-             //String dutyNumber, LocalTime startTime, LocalTime finishTime
             }
         } catch (SQLException ex) {
             System.out.println("Valami baj van az dutys adattábla létrehozásakor.");
@@ -140,8 +136,7 @@ public class DB {
         ArrayList<RotaLine> rotaLines =  new ArrayList<>();
         try {
             ResultSet rs = createStatement.executeQuery(sql);
-            while (rs.next()){
-           
+            while (rs.next()){ 
                 int rl = rs.getInt("rotalineumber");
                 String sun = rs.getString("sundaydutynumber"); String mon = rs.getString("mondaydutynumber");
                 String tue = rs.getString("tuesdaydutynumber"); String wed = rs.getString("wednesdaydutynumber");

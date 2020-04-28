@@ -13,7 +13,7 @@ public class RotaLine {
     }
 
     public RotaLine(int rotaLine, String sundayDn, String mondayDn, String tuesdayDn, 
-            String wednesdayDn, String thursdayDn, String fridayDn, String saturdayDn){
+        String wednesdayDn, String thursdayDn, String fridayDn, String saturdayDn){
         this.rotaLine = rotaLine;
         this.fridayDn = fridayDn;
         this.mondayDn = mondayDn;

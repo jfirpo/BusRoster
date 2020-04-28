@@ -6,7 +6,6 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 public class Driver {
     
@@ -14,8 +13,7 @@ public class Driver {
     private String name;
     private String employeeNumber;
 
-    public Driver(){
-        
+    private Driver(){        
     }
     
     public Driver(String name, String employeeNumber, int startLine){
@@ -47,25 +45,4 @@ public class Driver {
     public int getStartLine() {
         return startLine;
     }
-    
-    public int countOfActualLine(Calendar inputDate){                
-                GregorianCalendar rotaStart;
-                rotaStart = RotaLine.getSTARTDATE();
-                Instant d1i = Instant.ofEpochMilli(rotaStart.getTimeInMillis());
-                Instant d2i = Instant.ofEpochMilli(inputDate.getTimeInMillis());
-                LocalDateTime startDate = LocalDateTime.ofInstant(d1i, ZoneId.systemDefault());
-                LocalDateTime endDate = LocalDateTime.ofInstant(d2i, ZoneId.systemDefault());
-                long weeksOfDifference =  ChronoUnit.WEEKS.between(startDate, endDate);
-                                    // a megadott datum hetenek kiszamolasa
-		actualLine = this.startLine;		
-                for (int i = 1; i <= weeksOfDifference; i++) {
-			actualLine++;
-			if (actualLine>=10) {
-				actualLine = 1;
-			}
-		}	
-		//megalapitja, hogy az adott naptari nap, milyen napra esik a heten
-return actualLine;
-}
-            
 }
