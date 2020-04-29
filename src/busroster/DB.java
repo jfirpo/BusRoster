@@ -130,19 +130,21 @@ public class DB {
         }
     return duties;
     }
-    // a rotalines tablabol visszaad minden ritallint egy arraylist objektumba
+    // a rotalines tablabol visszaad minden rotalinet egy arraylist objektumba
     public ArrayList<RotaLine> getAllRotaLines(){
         String sql = "select * from ROTALINE";
         ArrayList<RotaLine> rotaLines =  new ArrayList<>();
         try {
             ResultSet rs = createStatement.executeQuery(sql);
             while (rs.next()){ 
-                int rl = rs.getInt("rotalineumber");
-                String sun = rs.getString("sundaydutynumber"); String mon = rs.getString("mondaydutynumber");
-                String tue = rs.getString("tuesdaydutynumber"); String wed = rs.getString("wednesdaydutynumber");
-                String thu = rs.getString("thursdaydutynumber"); String fri = rs.getString("fridaydutynumber");
-                String sat = rs.getString("saturdaydutynumber"); 
-                rotaLines.add(new RotaLine(rl,sun, mon, tue, wed, thu, fri, sat));
+                ArrayList<String> rotaLine = new ArrayList<>();
+                int rotaLineNumber = rs.getInt("rotalineumber");
+                rotaLine.add(rs.getString("sundaydutynumber")); rotaLine.add(rs.getString("mondaydutynumber"));
+                rotaLine.add(rs.getString("tuesdaydutynumber")); rotaLine.add(rs.getString("wednesdaydutynumber"));
+                String thu = rs.getString("thursdaydutynumber"); rotaLine.add(rs.getString("fridaydutynumber"));
+                rotaLine.add(rs.getString("saturdaydutynumber")); 
+                RotaLine rotaLine1 = new RotaLine(rotaLineNumber, rotaLine);
+                rotaLines.add(rotaLine1);
             }
         } catch (SQLException ex) {
             System.out.println("Valami baj van a rotalines kiolvasásakor");
@@ -217,6 +219,7 @@ public class DB {
             System.out.println(""+ex);
         }
     } 
+/*
     // feltolt filebol a megadott rotalinesszam alapján a fajlban, adatokat a rotalines tablaba
     public void rotaLinesUpload(int numsOfRotaLines){
             try {
@@ -235,6 +238,7 @@ public class DB {
         catch (FileNotFoundException ex) {
                         System.out.println("Valami gond van a soforok filejaval.." + ex);                   }
     }
+
     //egy adott rotaline objektum adatait tolti fel a rotalines adattáblába
     public void addRotaLine(RotaLine rotaLine){
       try {
@@ -254,6 +258,7 @@ public class DB {
             System.out.println(""+ex);
         }
     }
+*/
     // az osszes adat kiiratasa a sofor tablabol a konzolra
     public void showAllDrivers(){
         String sql = "select * from drivers";

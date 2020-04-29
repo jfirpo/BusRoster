@@ -5,16 +5,15 @@ import java.time.LocalTime;
 public class Duty {
     private LocalTime startTime, finishTime;
     private String dutyNumber;
-    private boolean dayOff;
     
-    public Duty(){
+    
+    private Duty(){
     }    
 
     public Duty(String dutyNumber, LocalTime startTime, LocalTime finishTime ){
         this.dutyNumber = dutyNumber;
         this.finishTime = finishTime;
         this.startTime = startTime;
-        if (this.dutyNumber.equals("1001")) this.dayOff = true;
     }    
 
     public void setStartTime(LocalTime startTime) {
@@ -39,9 +38,5 @@ public class Duty {
 
     public String getDutyNumber() {
         return dutyNumber;
-    }
-
-    public boolean isDayOff() {
-        return dayOff;
     }
 }

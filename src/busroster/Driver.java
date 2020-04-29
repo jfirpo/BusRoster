@@ -1,15 +1,8 @@
 package busroster;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 public class Driver {
     
-    private int startLine, actualLine;
+    private int startLine;
     private String name;
     private String employeeNumber;
 

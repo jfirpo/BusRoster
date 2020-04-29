@@ -12,8 +12,7 @@ public class Swap {
         this.dutyNumberOnpossibleSwapDay = dutyNumberOnpossibleSwapDay;
         this.possibleSwapDay = possibleSwapDay;
         this.possibleSwapLine = possibleSwapLine;
-        this.possibleSwapperDriverName = possibleSwapperDriverName;
-        
+        this.possibleSwapperDriverName = possibleSwapperDriverName;        
     }
 
     public int getPossibleSwapLine() {
@@ -30,5 +29,21 @@ public class Swap {
 
     public String getPossibleSwapperDriverName() {
         return possibleSwapperDriverName;
+    }
+
+    public void setPossibleSwapLine(int possibleSwapLine) {
+        this.possibleSwapLine = possibleSwapLine;
+    }
+
+    public void setPossibleSwapDay(int possibleSwapDay) {
+        this.possibleSwapDay = possibleSwapDay;
+    }
+
+    public void setDutyNumberOnpossibleSwapDay(String dutyNumberOnpossibleSwapDay) {
+        this.dutyNumberOnpossibleSwapDay = dutyNumberOnpossibleSwapDay;
+    }
+
+    public void setPossibleSwapperDriverName(String possibleSwapperDriverName) {
+        this.possibleSwapperDriverName = possibleSwapperDriverName;
     }
 }
